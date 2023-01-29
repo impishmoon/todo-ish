@@ -1,10 +1,10 @@
 import ListHeader from "./components/ListHeader";
-import ListItem from "./components/ListItem";
+// import ListItem from "./components/ListItem";
 
 const App = () => {
   return (
     <div className="app">
-      <ListHeader listName={'🏝 Holiday Tick List'} />
+      <ListHeader listName={'🏝 Holiday Todo List'} />
     </div>
   );
 }
