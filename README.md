@@ -1,1 +1,1 @@
-a todolist app developed with PostGres, React and Node.js 
+a todolist app developed with React, Postgres and Node.js 
