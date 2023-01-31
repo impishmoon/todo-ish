@@ -3,19 +3,19 @@ const express = require('express');
 const cors = require('cors');
 const postgres = require('pg');
 const app = express();
-const pool = require('./db');
+const pool = require('./db.js');
 
 app.use(cors())
 
-app.get('/', (req, res) => {
-    res.send("hello word");
-})
+// app.get('/', (req, res) => {
+//     res.send("hello word");
+// })
 app.get('/todos/:userEmail', async (req, res) => {
-    console.log(req)
-    const {userEmail} = req.params
+    const {userEmail} = req.params;
+    // console.log(pool);
     try {
         const todos = await pool.query('SELECT * FROM todos WHERE user_email = $1', [userEmail])
-        res.json(todos.rows)                                        
+        res.json(todos.rows)
     } catch (err) {
         console.error(err)
     }
