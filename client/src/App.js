@@ -20,7 +20,7 @@ const App = () => {
   }
 
   useEffect(() => getData, [])
-  console.log(tasks)
+  // console.log(tasks)
 
 
   //Sort by date
@@ -30,7 +30,7 @@ const App = () => {
   return (
     <div className="app">
       <ListHeader listName={'🏝 Holiday Todo List'} />
-      {sortedTasks?.map((task) => <ListItem key={tasks.id} task={task}/>)}
+      {sortedTasks?.map((task) => <ListItem key={task.id} task={task}/>)}
     </div>
   );
 }
