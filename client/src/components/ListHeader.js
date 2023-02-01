@@ -4,7 +4,7 @@ import Modal from "./Modal";
 const ListHeader = ({ listName }) => {
     const [showModal, setShowModal] = useState(false)
     const signOut = () => {
-        // console.log("signedout")
+        console.log("signedout")
     }
     console.log(showModal)
     return (
@@ -14,10 +14,9 @@ const ListHeader = ({ listName }) => {
                 <button className="create" onClick={() => setShowModal(true)}>ADD NEW</button>
                 <button className="signout" onClick={signOut}>SIGN OUT</button>
             </div>
-            {showModal && <Modal key='1' mode={'create'} setShowModal={setShowModal} />}
+            {showModal && <Modal mode={'create'} setShowModal={setShowModal} />}
         </div>
     );
-
 }
 
 export default ListHeader;
