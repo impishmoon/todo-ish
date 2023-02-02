@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
-const Modal = (mode, setShowModal) => {
-  const editMode = mode === 'edit' ? true : false
+const Modal = (props) => {
+  const editMode = props.mode === 'edit' ? true : false
+
   const [data, setData] = useState({
     user_email: "",
     title: "",
@@ -21,8 +22,8 @@ const Modal = (mode, setShowModal) => {
     <div className="overlay">
       <div className="modal">
         <div className="form-title-container">
-          <h3>Let's {mode} your task</h3>
-          <button onClick={() => setShowModal(false)}>X</button>
+          <h3>Let's {props.mode} your task</h3>
+          <button onClick={() => props.setShowModal(false)}>X</button>
         </div>
         <form>
           <input
@@ -34,7 +35,7 @@ const Modal = (mode, setShowModal) => {
             onChange={handleChange}
           />
           <br />
-          <label for='range'>Drag to select your current progress</label>
+          <label htmlFor='range'>Drag to select your current progress</label>
           <input
             required
             type='range'
@@ -45,10 +46,11 @@ const Modal = (mode, setShowModal) => {
             value={data.progress}
             onChange={handleChange}
           />
-          <input className={mode} type='submit' />
+          <input className={props.mode} type='submit' />
         </form>
       </div>
     </div>
+    
   )
 }
 
