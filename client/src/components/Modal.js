@@ -2,11 +2,11 @@ import { useState } from 'react';
 
 const Modal = (props) => {
   const editMode = props.mode === 'edit' ? true : false
-
+  console.log(props)
   const [data, setData] = useState({
-    user_email: "",
-    title: "",
-    progress: "",
+    user_email: editMode? props.task.user_email:null,
+    title: editMode? props.task.title:null,
+    progress: editMode? props.task.progress:null,
     date: editMode ? "" : new Date().getTime() //unix timestamp
   })
 
