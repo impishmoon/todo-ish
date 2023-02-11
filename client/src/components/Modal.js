@@ -2,13 +2,48 @@ import { useState } from 'react';
 
 const Modal = (props) => {
   const editMode = props.mode === 'edit' ? true : false
-  console.log(props)
   const [data, setData] = useState({
-    user_email: editMode? props.task.user_email:null,
-    title: editMode? props.task.title:null,
-    progress: editMode? props.task.progress:null,
-    date: editMode ? "" : new Date().getTime() //unix timestamp
+    user_email: editMode ? props.task.user_email : "brodidstuff@org.com",
+    title: editMode ? props.task.title : '',
+    progress: editMode ? props.task.progress : 50,
+    date: editMode ? props.task.date : new Date().getTime() //unix timestamp
   })
+  console.log(data)
+
+  const postData = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:8000/todos', {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      if (response.status === 200) {
+        console.log('Posted')
+        props.setShowModal(false)
+        props.getData()
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  const editData = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(`http://localhost:8000/todos/${props.task.id}`, {
+        method: "PUT",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      if (res.status === 200){
+        props.setShowModal(false)
+        props.getData();
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,11 +81,11 @@ const Modal = (props) => {
             value={data.progress}
             onChange={handleChange}
           />
-          <input className={props.mode} type='submit' />
+          <input className={props.mode} type='submit' value='SUBMIT' onClick={editMode ? editData : postData} />
         </form>
       </div>
     </div>
-    
+
   )
 }
 

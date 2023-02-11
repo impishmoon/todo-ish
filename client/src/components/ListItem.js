@@ -4,9 +4,19 @@ import ProgressBar from './ProgressBar'
 import Modal from './Modal'
 
 
-const ListItem = ({ task }) => {
+const ListItem = ({ task, getData }) => {
   const [showModal, setShowModal] = useState(false)
-
+  const deleteItem = async () => {
+    try {
+      const res = await fetch(`http://localhost:8000/todos/${task.id}`)
+      if (res.status === 200)
+      {
+        getData()
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
   return (
     <li className="list-item" key={task.id}>
       <div className="info-container">
@@ -15,10 +25,10 @@ const ListItem = ({ task }) => {
         <ProgressBar />
       </div>
       <div className='button-container'>
-        <button className='edit' onClick={ () => setShowModal(true)}>EDIT</button>
-        <button className='delete'>DELETE</button>
+        <button className='edit' onClick={() => setShowModal(true)}>EDIT</button>
+        <button className='delete' onClick={deleteItem}>DELETE</button>
       </div>
-      {showModal&& <Modal mode={'edit'} setShowModal={setShowModal} task={task}/>}
+      {showModal && <Modal mode={'edit'} setShowModal={setShowModal} getData={getData} task={task} />}
 
     </li>
   )
