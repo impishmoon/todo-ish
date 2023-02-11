@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useCookies } from 'react-cookie';
+
 const Auth = () => {
   const [cookies, setCookie, removeCookie] = useCookies(null)
   const [IsloggedIn, setIsloggedIn] = useState(false)
@@ -14,7 +15,7 @@ const Auth = () => {
   }
 
   const handleSubmit = async (e, endpoint) => {
-    e.preventdefault();
+    e.preventDefault();
     if (!IsloggedIn && password !== confirmpassword) {
       setError('Passwords don\'t match')
     }
@@ -25,10 +26,12 @@ const Auth = () => {
     })
 
     const data = await res.json()
-    if (data.detail) { setError(data.detail) } else {
+    if (data.detail) {
+      setError(data.detail)
+    } else {
       setCookie('Email', data.email);
       setCookie('AuthToken', data.token);
-      window.location.reload();
+
     }
   }
 
@@ -38,7 +41,7 @@ const Auth = () => {
         <form className="auth-form">
           <h2>{IsloggedIn ? 'login' : 'signup'}</h2>
           <input type="email" placeholder="Your email goes here" onChange={(e) => setemail(e.target.value)} />
-          <input type="password" placeholder="Your password goes here" onChange={(e) => password(e.target.value)} />
+          <input type="password" placeholder="Your password goes here" onChange={(e) => setpassword(e.target.value)} />
           {!IsloggedIn && <input type="password" placeholder="Repeat your password" onChange={(e) => setconfirmpassword(e.target.value)} />}
           <input className='create' type='submit' value='SUBMIT' onClick={(e) => handleSubmit(e, IsloggedIn ? 'login' : 'signup')} />
           {error && <p>{error}</p>}
