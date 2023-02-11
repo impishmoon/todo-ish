@@ -13,7 +13,7 @@ app.use(express.json());
 app.get('/todos/:userEmail', async (req, res) => {
     const { userEmail } = req.params;
     try {
-        const todos = await pool.query('SELECT * FROM todos WHERE user_email = $1', [userEmail])
+        const todos = await pool.query('SELECT * FROM todos WHERE user_email = $1;', [userEmail])
         res.json(todos.rows)
     } catch (err) {
         console.error(err)
@@ -26,7 +26,7 @@ app.post('/todos', async (req, res) => {
     const id = uuidv4();
     console.log(id, user_email, title, progress, date);
     try {
-        const newToDo = await pool.query(`INSERT INTO todos(id, user_email, title, progress, date) VALUES($1, $2, $3, $4, $5)`, [id, user_email, title, progress, date])
+        const newToDo = await pool.query(`INSERT INTO todos(id, user_email, title, progress, date) VALUES($1, $2, $3, $4, $5);`, [id, user_email, title, progress, date])
         res.json(newToDo)
     } catch (error) {
         console.error(error)
@@ -46,12 +46,11 @@ app.put('/todos/:id', async (req, res) => {
 })
 
 //delete a todo
-app.delete('/todos:id', async (req,res) =>{
-    const {id} = req.params;
-    
+app.delete('/todos/:id', async (req, res) => {
+    const { id } = req.params;
     try {
         const deleteToDo = await pool.query(`DELETE FROM todos WHERE id=$1;`, [id]);
-        res.json(deleteToDo)    
+        res.json(deleteToDo)
     } catch (error) {
         console.error(error)
     }
