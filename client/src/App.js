@@ -8,7 +8,7 @@ const App = () => {
   const userEmail = 'brodidstuff@org.com'
   const [tasks, setTasks] = useState(null)
 
-  const authToken = false;
+  const authToken = true;
 
   const getData = async () => {
     try {

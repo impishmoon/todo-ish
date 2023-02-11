@@ -55,8 +55,8 @@ const handleChange = (e) => {
 }
 
 return (
-  <div className="overlay">
-    <div className="modal">
+  <div className="overlay"onClick={() => props.setShowModal(false)}>
+    <div className="modal"onClick={(e) => e.stopPropagation()}>
       <div className="form-title-container">
         <h3>Let's {props.mode} your task</h3>
         <button onClick={() => props.setShowModal(false)}>X</button>
