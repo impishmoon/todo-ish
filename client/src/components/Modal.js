@@ -13,7 +13,7 @@ const Modal = (props) => {
   const postData = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:8000/todos', {
+      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/todos`, {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -31,7 +31,7 @@ const Modal = (props) => {
   const editData = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`http://localhost:8000/todos/${props.task.id}`, {
+      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/todos/${props.task.id}`, {
         method: "PUT",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
