@@ -3,7 +3,7 @@ import { useCookies } from 'react-cookie';
 
 const Auth = () => {
   const [cookies, setCookie, removeCookie] = useCookies(null)
-  const [IsloggedIn, setIsloggedIn] = useState(false)
+  const [IsloggedIn, setIsloggedIn] = useState(true)
   const [email, setemail] = useState(null)
   const [password, setpassword] = useState(null)
   const [confirmpassword, setconfirmpassword] = useState(null)
@@ -49,11 +49,11 @@ const Auth = () => {
         <div className="auth-options">
           <button
             onClick={() => viewLogin(false)}
-            style={{ backgroundColor: IsloggedIn ? 'rgb(255,255,255)' : 'rgb(188,188,188)' }}
+            style={{ backgroundColor: !IsloggedIn ? 'rgb(255,255,255)' : 'rgb(188,188,188)' }}
           >Sign Up</button>
           <button
             onClick={() => viewLogin(true)}
-            style={{ backgroundColor: !IsloggedIn ? 'rgb(255,255,255)' : 'rgb(188,188,188)' }}
+            style={{ backgroundColor: IsloggedIn ? 'rgb(255,255,255)' : 'rgb(188,188,188)' }}
           >Login</button>
         </div>
       </div>
