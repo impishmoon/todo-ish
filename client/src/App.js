@@ -6,6 +6,9 @@ import { useEffect, useState } from 'react'
 const App = () => {
   const userEmail = 'brodidstuff@org.com'
   const [tasks, setTasks] = useState(null)
+
+  const authToken = true;
+
   const getData = async () => {
     try {
       const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/todos/${userEmail}`)
@@ -22,13 +25,18 @@ const App = () => {
 
 
   //Sort by date
-  const sortedTasks = tasks?.sort((a, b) => a.date -b.date);
+  const sortedTasks = tasks?.sort((a, b) => a.date - b.date);
 
 
   return (
     <div className="app">
-      <ListHeader getData={getData} listName={'🏝 Holiday Todo List'} />
-      {sortedTasks?.map((task) => <ListItem key={task.id} getData={getData} task={task}/>)}
+      {!authToken && <Auth/>}
+      {authToken &&
+        <>
+          <ListHeader getData={getData} listName={'🏝 Holiday Todo List'} />
+          {sortedTasks?.map((task) => <ListItem key={task.id} getData={getData} task={task} />)}
+        </>}
+
     </div>
   );
 }
