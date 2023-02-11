@@ -1,7 +1,7 @@
 import Auth from "./components/Auth";
 import ListHeader from "./components/ListHeader";
 import ListItem from "./components/ListItem";
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 
 const App = () => {
@@ -24,7 +24,8 @@ const App = () => {
   useEffect(() => {
     if (authToken) {
       getData()
-    }}, [])
+    }
+  }, [])
   // console.log(tasks)
 
 
