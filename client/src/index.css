@@ -192,6 +192,9 @@ input {
     height: 350px;
     padding: 20px;
 }
+.auth-container-box h2 {
+    text-transform: capitalize;
+}
 
 .auth-options{
     display: flex;

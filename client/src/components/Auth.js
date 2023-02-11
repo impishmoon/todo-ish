@@ -17,17 +17,24 @@ const Auth = () => {
     if (!loggedIn && password !== confirmpassword) {
       setError('Passwords don\'t match')
     }
-    await fetch(`${process.env.REACT_APP_SERVER_URL}/${endpoint}`)
+    const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/${endpoint}`, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email,password})
+    })
+
+    const data = await res.json()
+    console.log(data);
   }
 
   return (
     <div className="auth-container">
       <div className="auth-container-box">
         <form className="auth-form">
-          <h2>{loggedIn ? 'Log In' : 'Sign Up'}</h2>
-          <input type="email" placeholder="Your email goes here" onChange={setemail}/>
-          <input type="password" placeholder="Your password goes here" onChange={setpassword} />
-          {!loggedIn && <input type="password" placeholder="Repeat your password" onChange={setconfirmpassword} />}
+          <h2>{loggedIn ? 'login' : 'signup'}</h2>
+          <input type="email" placeholder="Your email goes here" onChange={(e) => setemail(e.target.value)}/>
+          <input type="password" placeholder="Your password goes here" onChange={(e) => password(e.target.value)} />
+          {!loggedIn && <input type="password" placeholder="Repeat your password" onChange={(e) => setconfirmpassword(e.target.value)} />}
           <input className='create' type='submit' value='SUBMIT' onClick={(e) => handleSubmit(e, loggedIn ? 'login' : 'signup')} />
           {error && <p>{error}</p>}
         </form>

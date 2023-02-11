@@ -2,9 +2,9 @@ const PORT = process.env.PORT ?? 8000;
 const express = require('express');
 const { v4: uuidv4 } = require('uuid');
 const cors = require('cors');
-const postgres = require('pg');
 const app = express();
 const pool = require('./db.js');
+const bcrypt = require('bcrypt');
 
 app.use(cors());
 app.use(express.json());
@@ -55,5 +55,29 @@ app.delete('/todos/:id', async (req, res) => {
         console.error(error)
     }
 })
+//signup
+app.post('/signup', async (req,res) =>{
+    const {email,pass} = req.body
+    const salt = bcrypt.genSaltSync(10)
+    const hashedpass = bcrypt.hashSync(pass,salt)
+    try {
+        await pool.query(`INSERT INTO users (email, hashed_pass)`)
+    } catch (error) {
+        console.error(error)
+    }
+})
+//login
+app.post('/login', async (req,res) =>{
+    const {email,pass} = req.body
+    
+    try {
+        
+    } catch (error) {
+        console.error(error)
+    }
+})
+
+
+
 
 app.listen(PORT, () => console.log(`Server running on PORT ${PORT}`))
