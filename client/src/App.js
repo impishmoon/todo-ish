@@ -8,7 +8,7 @@ const App = () => {
   const userEmail = 'brodidstuff@org.com'
   const [tasks, setTasks] = useState(null)
 
-  const authToken = true;
+  const authToken = false;
 
   const getData = async () => {
     try {
@@ -21,7 +21,10 @@ const App = () => {
     }
   }
 
-  useEffect(() => getData, [])
+  useEffect(() => {
+    if (authToken) {
+      getData()
+    }}, [])
   // console.log(tasks)
 
 
@@ -31,7 +34,7 @@ const App = () => {
 
   return (
     <div className="app">
-      {!authToken && <Auth/>}
+      {!authToken && <Auth />}
       {authToken &&
         <>
           <ListHeader getData={getData} listName={'🏝 Holiday Todo List'} />
