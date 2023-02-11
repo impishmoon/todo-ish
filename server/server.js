@@ -73,13 +73,12 @@ app.post('/signup', async (req, res) => {
         }
     }
 })
+
 //login
 app.post('/login', async (req, res) => {
     const { email, password } = req.body
-    const salt = bcrypt.genSaltSync(10)
-    const hashedpassword = bcrypt.hashSync(password, salt)
     try {
-        const users = await pool.query(`SELECT * FROM users WHERE email = $1`, [email, hashedpassword])
+        const users = await pool.query(`SELECT * FROM users WHERE email = $1`, [email])
         if (!users.rows.length) return res.json({ detail: 'User doesn\'t exist' })
         const success = await bcrypt.compare(password, users.rows[0].hashed_password)
         const token = jwt.sign({ email }, 'secret', { expiresIn: '1hr' })
