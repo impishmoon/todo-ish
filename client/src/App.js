@@ -1,3 +1,4 @@
+import Auth from "./components/Auth";
 import ListHeader from "./components/ListHeader";
 import ListItem from "./components/ListItem";
 import { useEffect, useState } from 'react'
@@ -7,7 +8,7 @@ const App = () => {
   const userEmail = 'brodidstuff@org.com'
   const [tasks, setTasks] = useState(null)
 
-  const authToken = true;
+  const authToken = false;
 
   const getData = async () => {
     try {
