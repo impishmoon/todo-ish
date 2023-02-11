@@ -6,11 +6,9 @@ import { useEffect, useState } from 'react'
 const App = () => {
   const userEmail = 'brodidstuff@org.com'
   const [tasks, setTasks] = useState(null)
-
   const getData = async () => {
-
     try {
-      const res = await fetch(`http://localhost:8000/todos/${userEmail}`)
+      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/todos/${userEmail}`)
       const json = await res.json()
       setTasks(json)
     }
