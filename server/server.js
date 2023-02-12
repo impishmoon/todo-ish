@@ -10,6 +10,11 @@ const jwt = require('jsonwebtoken');
 app.use(cors());
 app.use(express.json());
 
+app.get('/helloword', (req,res) =>{
+    res.json('helloword')
+    console.log('helloword')
+})
+
 //get tasks by email
 app.get('/todos/:userEmail', async (req, res) => {
     const { userEmail } = req.params;
