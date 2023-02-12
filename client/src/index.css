@@ -206,3 +206,32 @@ input {
     padding: 10px;
     color: rgb(35,38,47);
 }
+.user-email{
+    float:right;
+    font-size: 13px;
+    margin:10px;
+    color:rgb(114,114,144);
+}
+.outer-bar{
+    width:200px;
+    height:14px;
+    background-color: rgb(216,216,216); 
+    border-radius: 7px;
+    overflow: hidden;
+}
+.inner-bar{
+    height:14px;
+    background-color: rgb(216,216,216); 
+    border-radius: 7px;
+    overflow: hidden;
+}
+.task-title{
+    width:300px;
+    color:rgb(255,214,161);
+    color:rgb(255,175,163);
+    color:rgb(130, 172, 206);
+    color:rgb(141,181,145);
+}
+.modal-range{
+    padding:0;
+}
