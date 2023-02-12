@@ -3,14 +3,14 @@ import { useCookies } from 'react-cookie';
 
 const Modal = (props) => {
   const editMode = props.mode === 'edit' ? true : false
-  const [cookies, setCookie, removeCookie] = useCookies(null);
+  const [cookies, ,] = useCookies(null);
   const [data, setData] = useState({
     user_email: editMode ? props.task.user_email : cookies.Email,
     title: editMode ? props.task.title : '',
     progress: editMode ? props.task.progress : 50,
     date: editMode ? props.task.date : new Date().getTime() //unix timestamp
   })
-  console.log(data)
+  // console.log(data)
 
   const postData = async (e) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ const Modal = (props) => {
         body: JSON.stringify(data)
       })
       if (res.status === 200) {
-        console.log('Posted')
+        // console.log('Posted')
         props.setShowModal(false)
         props.getData()
       }
