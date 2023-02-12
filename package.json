@@ -2,6 +2,10 @@
   "name": "todo-ish",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node":"^18.13.0",
+    "npm":"^8.3.2"
+  },
   "scripts": {
     "build": "if-env TYPE=server && (cd server && npm install) || (cd client && npm install)",
     "server": "node ./server/server.js",
