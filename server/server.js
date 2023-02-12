@@ -68,7 +68,7 @@ app.post('/signup', async (req, res) => {
     const hashedpassword = bcrypt.hashSync(password, salt)
     try {
         const signUp = await pool.query(`INSERT INTO users (email, hashed_pass) VALUES($1, $2)`, [email, hashedpassword])
-        const token = jwt.sign({ email }, 'secret', { expiresIn: '1hr' })
+        const token = jwt.sign({ email }, process.env.JWTSECRET, { expiresIn: '1hr' })
 
         res.json({ email, token })
     } catch (error) {
@@ -87,7 +87,7 @@ app.post('/login', async (req, res) => {
         if (!users.rows.length) {
              return res.json({ detail: 'User doesn\'t exist' }) }
         const success = await bcrypt.compare(password, users.rows[0].hashed_pass)
-        const token = jwt.sign({ email }, 'secret', { expiresIn: '1hr' })
+        const token = jwt.sign({ email }, 'THISISMYSUPEREMESECURESECRET', { expiresIn: '1hr' })
 
         if (success) {
             res.json({ 'email': users.rows[0].email, token })
