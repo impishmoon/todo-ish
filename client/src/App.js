@@ -6,7 +6,7 @@ import {useCookies} from 'react-cookie';
 
 
 const App = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(null);
+  const [cookies, ,] = useCookies(null);
   const [tasks, setTasks] = useState(null);
   const userEmail = cookies.Email;
   const authToken = cookies.AuthToken;
@@ -26,7 +26,7 @@ const App = () => {
     if (authToken) {
       getData()
     }
-  }, [])
+  })
   // console.log(tasks)
 
 

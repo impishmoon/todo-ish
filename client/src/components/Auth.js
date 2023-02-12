@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useCookies } from 'react-cookie';
 
 const Auth = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(null)
+  const [, setCookie,] = useCookies(null)
   const [IsloggedIn, setIsloggedIn] = useState(true)
   const [email, setemail] = useState(null)
   const [password, setpassword] = useState(null)
