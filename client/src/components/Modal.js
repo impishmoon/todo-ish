@@ -75,6 +75,7 @@ const Modal = (props) => {
           <br />
           <label htmlFor='range'>Drag to select your current progress</label>
           <input
+            className='modal-range'
             required
             type='range'
             id='range'
